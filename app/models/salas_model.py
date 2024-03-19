@@ -9,3 +9,5 @@ class Salas(Base):
     escola_uuid = db.Column(db.UUID(as_uuid=True), db.ForeignKey("escolas.uuid"))
     turmas = db.relationship("Turmas", back_populates="sala_turma")
     escola = db.relationship("Escolas", back_populates="salas")
+    turno = db.Column(db.String)
+    ano = db.Column(db.String)
