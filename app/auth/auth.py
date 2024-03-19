@@ -11,7 +11,6 @@ __all__ = ["Key", "encode_token", "decode_token"]
 
 
 def validate_token(token: str) -> str:
-    print(token)
     if not token or not "Bearer" in token:
         raise error.CustomException(
             status_code=401, detail="Desculpe, você não tem permissão."
@@ -26,7 +25,6 @@ def validate_token(token: str) -> str:
 
 def get_user_from_payload(payload: dict) -> models.Usuario:
     user_uuid = payload["sub"].get("user_uuid")
-    print(user_uuid)
     if not user_uuid:
         raise error.CustomException(
             status_code=401, detail="Desculpe, você não tem permissão."
@@ -46,11 +44,9 @@ def get_user_from_payload(payload: dict) -> models.Usuario:
 def decode_token(token: str, key: Union[int, None] = None) -> dict:
     try:
         token = validate_token(token)
-        print(token)
         payload = jwt.decode(
             token, core.settings.SECRET_KEY, algorithms="HS256"
         )
-        print(payload["sub"])
         if "user_uuid" in payload["sub"]:
             user = get_user_from_payload(payload)
         if key and key not in payload["sub"].get("key", []):
