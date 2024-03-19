@@ -33,6 +33,7 @@ role = [
 usuarios = [
     {
         "cpf":"gestor",
+        "nome":"gestor",
         "senha":"string123456",
         "email":"teste@example.com",
     }
@@ -96,6 +97,7 @@ def pop_db() -> None:
 				cpf=core.settings.FIRST_SUPERUSER
 				if core.settings.FIRST_SUPERUSER
 				else "admin",
+				nome="admin",
 				senha=core.settings.FIRST_SUPERUSER_PASSWORD
 				if core.settings.FIRST_SUPERUSER_PASSWORD
 				else "admin",
@@ -114,11 +116,12 @@ def pop_db() -> None:
 		else:
 			usuario_schema = schema.PostUsuario(
 				cpf=usuarios[0]["cpf"],
+				cpf=usuarios[0]["nome"],
 				email=usuarios[0]["email"],
 				senha=usuarios[0]["senha"],
 				papel_uuid=role_gestor.uuid,
 				papel_name=role_gestor.nome,
-				access_level=str(role_gestor.access_level),
+				access_level=role_gestor.access_level,
 				active=True,
 			)
 			user_data = models.Usuario(**usuario_schema.model_dump())

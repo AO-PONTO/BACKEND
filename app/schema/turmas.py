@@ -15,6 +15,9 @@ __all__ = [
     "PutTurmas",
 ]
 
+class HorarioSchema(BaseModel):
+    dia: int
+    hora: str
 
 class PostTurmas(BaseModel):
     """__summary__
@@ -31,9 +34,7 @@ class PostTurmas(BaseModel):
     disciplina: str = Field(None, description="disciplina Documentar")
     sala: UUID = Field(None, description="sala Documentar")
     nome_professor: str = Field(None, description="usuário do tipo professor")
-    turno: str = Field(None, description="turno Documentar")
-    horario: time = Field(None, description="horario Documentar")
-    ano: date = Field(None, description="ano Documentar")
+    horario: list[HorarioSchema] | str = Field(description="horario Documentar")
     
     #     validate_disciplina= validator("disciplina", allow_reuse=True)(...)
     #     validate_sala= validator("sala", allow_reuse=True)(...)
@@ -43,55 +44,18 @@ class PostTurmas(BaseModel):
     #     validate_ano= validator("ano", allow_reuse=True)(...)
 
     @model_validator(mode="before")
-    def validators_turmas(self) -> "PostTurmas":
+    def validators_PostLocation(self) -> "PostTurmas":
         try:
-            False
-            pass
+            if not "horario" in self:
+                raise error.CustomException(
+                    422,
+                    "É necessário informar o horario para prosseguir.",
+                )
+            self["horario"] = str(self["horario"])
             return self
         except Exception as e:
             raise error.custom_HTTPException(e)
 
-    class Config:
-        json_schema_extra = {
-            "examples": [
-                {
-                    "disciplina": "EbKoHEhoPPBfwiWpa",
-                    "sala": "bf7bd2a1-09be-4b58-b10d-f74c63b3c972",
-                    "nome_professor": "nOoyVChWc",
-                    "turno": "UDZZaJeCBEoOri",
-                    "horario": "None",
-                    "ano": "2023-12-21",
-                    "uuid": "99c1c8e2-ede3-458b-ae16-99866a43fcaf",
-                    "created_at": "2007-11-20 03:15:24",
-                    "updated_at": "2018-11-17 23:01:30",
-                }
-            ]
-        }
-
-    @classmethod
-    def as_form(
-        cls,
-        disciplina: str = Form(None, description="disciplina Documentar"),
-        sala: UUID = Form(None, description="sala Documentar"),
-        nome_professor: str = Form(None, description="usuário do tipo professor"),
-        turno: str = Form(None, description="turno Documentar"),
-        horario: time = Form(None, description="horario Documentar"),
-        ano: date = Form(None, description="ano Documentar"),
-        uuid: UUID = Form(..., description="uuid Documentar"),
-        created_at: datetime = Form(..., description="created_at Documentar"),
-        updated_at: datetime = Form(None, description="updated_at Documentar"),
-    ):
-        return cls(
-            disciplina=disciplina,
-            sala=sala,
-            nome_professor=nome_professor,
-            turno=turno,
-            horario=horario,
-            ano=ano,
-            uuid=uuid,
-            created_at=created_at,
-            updated_at=updated_at,
-        )
 
 
 class GetTurmas(BaseModel):
@@ -101,9 +65,6 @@ class GetTurmas(BaseModel):
         disciplina (str): descrever disciplina.
         sala (UUID): descrever sala.
         nome_professor (str): descrever nome_professor.
-        turno (str): descrever turno.
-        horario (time): descrever horario.
-        ano (date): descrever ano.
         uuid (UUID): descrever uuid.
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
@@ -112,9 +73,7 @@ class GetTurmas(BaseModel):
     disciplina: str | None = Field(None, description="disciplina Documentar")
     sala: UUID | None = Field(None, description="sala Documentar")
     nome_professor: str | None = Field(None, description="usuário do tipo professor")
-    turno: str | None = Field(None, description="turno Documentar")
-    horario: time | None = Field(None, description="horario Documentar")
-    ano: date | None = Field(None, description="ano Documentar")
+    horario: str | None = Field(None, description="horario Documentar")
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
     updated_at: datetime | None = Field(None, description="updated_at Documentar")
@@ -130,14 +89,10 @@ class PutTurmas(BaseModel):
         disciplina (str): descrever disciplina.
         sala (UUID): descrever sala.
         nome_professor (str): descrever nome_professor.
-        turno (str): descrever turno.
-        horario (time): descrever horario.
         ano (date): descrever ano.
     """
     
     disciplina: str = Field(None, description="disciplina Documentar")
     sala: UUID = Field(None, description="sala Documentar")
     nome_professor: str = Field(None, description="usuário do tipo professor")
-    turno: str = Field(None, description="turno Documentar")
-    horario: time = Field(None, description="horario Documentar")
-    ano: date = Field(None, description="ano Documentar")
+    horario: str = Field(None, description="horario Documentar")

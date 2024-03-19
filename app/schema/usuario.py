@@ -35,6 +35,7 @@ class PostUsuario(BaseModel):
     cpf: str = Field(None, description="cpf Documentar", max_length=11)
     senha: bytes = Field(None, description="senha Documentar")
     email: str = Field(None, description="email Documentar")
+    nome: str = Field(None, description="nome Documentar")
     data_nascimento: date = Field(None, description="data_nascimento Documentar")
     active: bool = Field(None, description="active Documentar")
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
@@ -76,60 +77,6 @@ class PostUsuario(BaseModel):
         except Exception as e:
             raise error.custom_HTTPException(e)
 
-    class Config:
-        json_schema_extra = {
-            "examples": [
-                {
-                    "cpf": "487.215.396-00",
-                    "senha": "NwrUvOIQZIFDfiHYj",
-                    "email": "yasminbarbosa@example.com",
-                    "data_nascimento": "2022-11-03",
-                    "active": "False",
-                    "escola_uuid": "f0e63c95-3061-4d93-8a94-a13e1a3363a1",
-                    "papel_uuid": "a5d998bc-410e-49a5-b90a-ef075836a99a",
-                    "escola_name": "OUjeLnSOlfvMHf",
-                    "papel_name": "yGjHQJydOh",
-                    "access_level": "qZEibBYWw",
-                    "uuid": "bb7c1d3c-addc-4e9f-9237-5a59dc37f762",
-                    "created_at": "2011-02-10 19:05:09",
-                    "updated_at": "1996-01-06 14:36:10",
-                }
-            ]
-        }
-
-    @classmethod
-    def as_form(
-        cls,
-        cpf: str = Form(None, description="cpf Documentar"),
-        senha: bytes = Form(None, description="senha Documentar"),
-        email: str = Form(None, description="email Documentar"),
-        data_nascimento: date = Form(None, description="data_nascimento Documentar"),
-        active: bool = Form(None, description="active Documentar"),
-        escola_uuid: UUID = Form(None, description="escola_uuid Documentar"),
-        papel_uuid: UUID = Form(None, description="papel_uuid Documentar"),
-        escola_name: str = Form(None, description="escola_name Documentar"),
-        papel_name: str = Form(None, description="papel_name Documentar"),
-        access_level: int = Form(None, description="access_level Documentar"),
-        uuid: UUID = Form(..., description="uuid Documentar"),
-        created_at: datetime = Form(..., description="created_at Documentar"),
-        updated_at: datetime = Form(None, description="updated_at Documentar"),
-    ):
-        return cls(
-            cpf=cpf,
-            senha=senha,
-            email=email,
-            data_nascimento=data_nascimento,
-            active=active,
-            escola_uuid=escola_uuid,
-            papel_uuid=papel_uuid,
-            escola_name=escola_name,
-            papel_name=papel_name,
-            access_level=access_level,
-            uuid=uuid,
-            created_at=created_at,
-            updated_at=updated_at,
-        )
-
 
 class GetUsuario(BaseModel):
     """__summary__
@@ -152,6 +99,7 @@ class GetUsuario(BaseModel):
     
     cpf: str | None = Field(None, description="cpf Documentar")
     email: str | None = Field(None, description="email Documentar")
+    nome: str | None = Field(None, description="nome Documentar")
     data_nascimento: date | None = Field(None, description="data_nascimento Documentar")
     active: bool | None = Field(None, description="active Documentar")
     escola_uuid: UUID | None = Field(None, description="escola_uuid Documentar")
@@ -185,6 +133,7 @@ class PutUsuario(BaseModel):
     
     cpf: str = Field(None, description="cpf Documentar")
     email: str = Field(None, description="email Documentar")
+    nome: str | None = Field(None, description="nome Documentar")
     data_nascimento: date = Field(None, description="data_nascimento Documentar")
     active: bool = Field(None, description="active Documentar")
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")

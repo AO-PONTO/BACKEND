@@ -26,7 +26,8 @@ class PostSalas(BaseModel):
     
     nome: str = Field(None, description="nome Documentar")
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
-    
+    ano: str = Field(None, description="ano Documentar")
+    turno: str = Field(None, description="turno Documentar")
     #     validate_nome= validator("nome", allow_reuse=True)(...)
     #     validate_escola_uuid= validator("escola_uuid", allow_reuse=True)(...)
 
@@ -39,35 +40,6 @@ class PostSalas(BaseModel):
         except Exception as e:
             raise error.custom_HTTPException(e)
 
-    class Config:
-        json_schema_extra = {
-            "examples": [
-                {
-                    "nome": "GRUMWY",
-                    "escola_uuid": "1b1846b8-3d73-423a-bff5-88b7138229e6",
-                    "uuid": "cb1c5bd1-9d34-4482-9204-eaa2ec701d6b",
-                    "created_at": "2002-11-18 22:00:26",
-                    "updated_at": "2017-05-02 06:50:20",
-                }
-            ]
-        }
-
-    @classmethod
-    def as_form(
-        cls,
-        nome: str = Form(None, description="nome Documentar"),
-        escola_uuid: UUID = Form(None, description="escola_uuid Documentar"),
-        uuid: UUID = Form(..., description="uuid Documentar"),
-        created_at: datetime = Form(..., description="created_at Documentar"),
-        updated_at: datetime = Form(None, description="updated_at Documentar"),
-    ):
-        return cls(
-            nome=nome,
-            escola_uuid=escola_uuid,
-            uuid=uuid,
-            created_at=created_at,
-            updated_at=updated_at,
-        )
 
 
 class GetSalas(BaseModel):
@@ -82,6 +54,8 @@ class GetSalas(BaseModel):
     """
     
     nome: str | None = Field(None, description="nome Documentar")
+    ano: str = Field(None, description="ano Documentar")
+    turno: str = Field(None, description="turno Documentar")
     escola_uuid: UUID | None = Field(None, description="escola_uuid Documentar")
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
@@ -101,3 +75,5 @@ class PutSalas(BaseModel):
     
     nome: str = Field(None, description="nome Documentar")
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
+    ano: str = Field(None, description="ano Documentar")
+    turno: str = Field(None, description="turno Documentar")

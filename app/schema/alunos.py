@@ -48,21 +48,6 @@ class PostAlunos(BaseModel):
         except Exception as e:
             raise error.custom_HTTPException(e)
 
-    class Config:
-        json_schema_extra = {
-            "examples": [
-                {
-                    "escola_uuid": "5d2314f5-3b23-4a0a-9c47-d56294b261c5",
-                    "escola_name": "DkqryhINOfpaV",
-                    "matricula": "7323",
-                    "nome": "sxan",
-                    "data_nascimento": "2017-06-11",
-                    "uuid": "d68d73b7-b25f-41e5-aee0-de671d18589a",
-                    "created_at": "2012-12-22 12:03:15",
-                    "updated_at": "2018-07-21 16:42:50",
-                }
-            ]
-        }
 
     @classmethod
     def as_form(
