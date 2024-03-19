@@ -1,8 +1,8 @@
-"""init_db
+"""init
 
-Revision ID: 6e945276d216
+Revision ID: 95965f7dec90
 Revises: 
-Create Date: 2024-02-07 16:47:39.962352
+Create Date: 2024-03-14 16:41:55.752642
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6e945276d216'
+revision = '95965f7dec90'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -97,6 +97,8 @@ def upgrade() -> None:
     op.create_table('salas',
     sa.Column('nome', sa.String(), nullable=True),
     sa.Column('escola_uuid', sa.UUID(), nullable=True),
+    sa.Column('turno', sa.String(), nullable=True),
+    sa.Column('ano', sa.String(), nullable=True),
     sa.Column('uuid', sa.UUID(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -107,6 +109,7 @@ def upgrade() -> None:
     sa.Column('cpf', sa.String(), nullable=False),
     sa.Column('senha', sa.LargeBinary(), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
+    sa.Column('nome', sa.String(), nullable=True),
     sa.Column('data_nascimento', sa.Date(), nullable=True),
     sa.Column('active', sa.Boolean(), nullable=True),
     sa.Column('escola_uuid', sa.UUID(), nullable=True),
@@ -127,9 +130,7 @@ def upgrade() -> None:
     sa.Column('disciplina', sa.String(), nullable=True),
     sa.Column('sala', sa.UUID(), nullable=True),
     sa.Column('nome_professor', sa.String(), nullable=True),
-    sa.Column('turno', sa.String(), nullable=True),
-    sa.Column('horario', sa.Time(), nullable=True),
-    sa.Column('ano', sa.Date(), nullable=True),
+    sa.Column('horario', sa.Text(), nullable=True),
     sa.Column('uuid', sa.UUID(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
