@@ -8,6 +8,7 @@ class Usuario(Base):
     cpf = db.Column(db.String, unique=True, nullable=False)
     senha = db.Column(db.LargeBinary(), nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
+    nome = db.Column(db.String)
     data_nascimento = db.Column(db.Date)
     active = db.Column(db.Boolean)
     escola_uuid = db.Column(db.UUID(as_uuid=True), db.ForeignKey("escolas.uuid"))
