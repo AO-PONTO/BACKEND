@@ -2,12 +2,9 @@ from datetime import datetime
 from uuid import UUID
 
 from fastapi import Form
-from pydantic import BaseModel, Field, validator, model_validator
+from pydantic import BaseModel, Field, model_validator, validator
 
 from app import error, models, util
-
-
-
 
 __all__ = [
     "PostPapel",
@@ -23,10 +20,10 @@ class PostPapel(BaseModel):
         nome (str): descrever nome.
         access_level (int): descrever access_level.
     """
-    
+
     nome: str = Field(None, description="nome Documentar")
     access_level: int = Field(None, description="access_level Documentar")
-    
+
     #     validate_nome= validator("nome", allow_reuse=True)(...)
     #     validate_access_level= validator("access_level", allow_reuse=True)(...)
 
@@ -80,13 +77,17 @@ class GetPapel(BaseModel):
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
     """
-    
+
     nome: str | None = Field(None, description="nome Documentar")
-    access_level: int | None = Field(None, description="access_level Documentar")
+    access_level: int | None = Field(
+        None, description="access_level Documentar"
+    )
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
-    updated_at: datetime | None = Field(None, description="updated_at Documentar")
-    
+    updated_at: datetime | None = Field(
+        None, description="updated_at Documentar"
+    )
+
     class Config:
         from_attributes = True
 
@@ -98,6 +99,6 @@ class PutPapel(BaseModel):
         nome (str): descrever nome.
         access_level (int): descrever access_level.
     """
-    
+
     nome: str = Field(None, description="nome Documentar")
     access_level: int = Field(None, description="access_level Documentar")

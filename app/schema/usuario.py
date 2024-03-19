@@ -2,12 +2,9 @@ from datetime import date, datetime
 from uuid import UUID
 
 from fastapi import Form
-from pydantic import BaseModel, Field, validator, model_validator
+from pydantic import BaseModel, Field, model_validator, validator
 
 from app import error, models, util
-
-
-
 
 __all__ = [
     "PostUsuario",
@@ -31,19 +28,21 @@ class PostUsuario(BaseModel):
         papel_name (str): descrever papel_name.
         access_level (str): descrever access_level.
     """
-    
+
     cpf: str = Field(None, description="cpf Documentar", max_length=11)
     senha: bytes = Field(None, description="senha Documentar")
     email: str = Field(None, description="email Documentar")
     nome: str = Field(None, description="nome Documentar")
-    data_nascimento: date = Field(None, description="data_nascimento Documentar")
+    data_nascimento: date = Field(
+        None, description="data_nascimento Documentar"
+    )
     active: bool = Field(None, description="active Documentar")
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
     papel_uuid: UUID = Field(None, description="papel_uuid Documentar")
     escola_name: str = Field(None, description="escola_name Documentar")
     papel_name: str = Field(None, description="papel_name Documentar")
     access_level: int = Field(None, description="access_level Documentar")
-    
+
     validate_senha = validator("senha", allow_reuse=True)(
         util.normalize_password
     )
@@ -96,21 +95,29 @@ class GetUsuario(BaseModel):
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
     """
-    
+
     cpf: str | None = Field(None, description="cpf Documentar")
     email: str | None = Field(None, description="email Documentar")
     nome: str | None = Field(None, description="nome Documentar")
-    data_nascimento: date | None = Field(None, description="data_nascimento Documentar")
+    data_nascimento: date | None = Field(
+        None, description="data_nascimento Documentar"
+    )
     active: bool | None = Field(None, description="active Documentar")
-    escola_uuid: UUID | None = Field(None, description="escola_uuid Documentar")
+    escola_uuid: UUID | None = Field(
+        None, description="escola_uuid Documentar"
+    )
     papel_uuid: UUID | None = Field(None, description="papel_uuid Documentar")
     escola_name: str | None = Field(None, description="escola_name Documentar")
     papel_name: str | None = Field(None, description="papel_name Documentar")
-    access_level: int | None = Field(None, description="access_level Documentar")
+    access_level: int | None = Field(
+        None, description="access_level Documentar"
+    )
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
-    updated_at: datetime | None = Field(None, description="updated_at Documentar")
-    
+    updated_at: datetime | None = Field(
+        None, description="updated_at Documentar"
+    )
+
     class Config:
         from_attributes = True
 
@@ -130,11 +137,13 @@ class PutUsuario(BaseModel):
         papel_name (str): descrever papel_name.
         access_level (str): descrever access_level.
     """
-    
+
     cpf: str = Field(None, description="cpf Documentar")
     email: str = Field(None, description="email Documentar")
     nome: str | None = Field(None, description="nome Documentar")
-    data_nascimento: date = Field(None, description="data_nascimento Documentar")
+    data_nascimento: date = Field(
+        None, description="data_nascimento Documentar"
+    )
     active: bool = Field(None, description="active Documentar")
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
     papel_uuid: UUID = Field(None, description="papel_uuid Documentar")

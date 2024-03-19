@@ -2,12 +2,9 @@ from datetime import datetime
 from uuid import UUID
 
 from fastapi import Form
-from pydantic import BaseModel, Field, validator, model_validator
+from pydantic import BaseModel, Field, model_validator, validator
 
 from app import error, models, util
-
-
-
 
 __all__ = [
     "PostCardapioEscola",
@@ -27,14 +24,16 @@ class PostCardapioEscola(BaseModel):
         dia_da_semana (str): descrever dia_da_semana.
         turno (str): descrever turno.
     """
-    
+
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
     cardapio_uuid: UUID = Field(None, description="cardapio_uuid Documentar")
     cardapio_name: str = Field(None, description="cardapio_name Documentar")
-    cardapio_descricao: str = Field(None, description="cardapio_descricao Documentar")
+    cardapio_descricao: str = Field(
+        None, description="cardapio_descricao Documentar"
+    )
     dia_da_semana: str = Field(None, description="dia_da_semana Documentar")
     turno: str = Field(None, description="turno Documentar")
-    
+
     #     validate_escola_uuid= validator("escola_uuid", allow_reuse=True)(...)
     #     validate_cardapio_uuid= validator("cardapio_uuid", allow_reuse=True)(...)
     #     validate_cardapio_name= validator("cardapio_name", allow_reuse=True)(...)
@@ -72,10 +71,18 @@ class PostCardapioEscola(BaseModel):
     def as_form(
         cls,
         escola_uuid: UUID = Form(None, description="escola_uuid Documentar"),
-        cardapio_uuid: UUID = Form(None, description="cardapio_uuid Documentar"),
-        cardapio_name: str = Form(None, description="cardapio_name Documentar"),
-        cardapio_descricao: str = Form(None, description="cardapio_descricao Documentar"),
-        dia_da_semana: str = Form(None, description="dia_da_semana Documentar"),
+        cardapio_uuid: UUID = Form(
+            None, description="cardapio_uuid Documentar"
+        ),
+        cardapio_name: str = Form(
+            None, description="cardapio_name Documentar"
+        ),
+        cardapio_descricao: str = Form(
+            None, description="cardapio_descricao Documentar"
+        ),
+        dia_da_semana: str = Form(
+            None, description="dia_da_semana Documentar"
+        ),
         turno: str = Form(None, description="turno Documentar"),
         uuid: UUID = Form(..., description="uuid Documentar"),
         created_at: datetime = Form(..., description="created_at Documentar"),
@@ -108,17 +115,29 @@ class GetCardapioEscola(BaseModel):
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
     """
-    
-    escola_uuid: UUID | None = Field(None, description="escola_uuid Documentar")
-    cardapio_uuid: UUID | None = Field(None, description="cardapio_uuid Documentar")
-    cardapio_name: str | None = Field(None, description="cardapio_name Documentar")
-    cardapio_descricao: str | None = Field(None, description="cardapio_descricao Documentar")
-    dia_da_semana: str | None = Field(None, description="dia_da_semana Documentar")
+
+    escola_uuid: UUID | None = Field(
+        None, description="escola_uuid Documentar"
+    )
+    cardapio_uuid: UUID | None = Field(
+        None, description="cardapio_uuid Documentar"
+    )
+    cardapio_name: str | None = Field(
+        None, description="cardapio_name Documentar"
+    )
+    cardapio_descricao: str | None = Field(
+        None, description="cardapio_descricao Documentar"
+    )
+    dia_da_semana: str | None = Field(
+        None, description="dia_da_semana Documentar"
+    )
     turno: str | None = Field(None, description="turno Documentar")
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
-    updated_at: datetime | None = Field(None, description="updated_at Documentar")
-    
+    updated_at: datetime | None = Field(
+        None, description="updated_at Documentar"
+    )
+
     class Config:
         from_attributes = True
 
@@ -134,10 +153,12 @@ class PutCardapioEscola(BaseModel):
         dia_da_semana (str): descrever dia_da_semana.
         turno (str): descrever turno.
     """
-    
+
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
     cardapio_uuid: UUID = Field(None, description="cardapio_uuid Documentar")
     cardapio_name: str = Field(None, description="cardapio_name Documentar")
-    cardapio_descricao: str = Field(None, description="cardapio_descricao Documentar")
+    cardapio_descricao: str = Field(
+        None, description="cardapio_descricao Documentar"
+    )
     dia_da_semana: str = Field(None, description="dia_da_semana Documentar")
     turno: str = Field(None, description="turno Documentar")

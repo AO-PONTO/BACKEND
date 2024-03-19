@@ -7,4 +7,6 @@ class Cardapio(Base):
 
     nome = db.Column(db.String)
     descricao = db.Column(db.String)
-    cardapio_escola = db.relationship("CardapioEscola", back_populates="cardapio")
+    cardapio_escola = db.relationship(
+        "CardapioEscola", back_populates="cardapio"
+    )

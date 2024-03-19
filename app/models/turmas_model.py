@@ -11,5 +11,3 @@ class Turmas(Base):
     horario = db.Column(db.Text)
     sala_turma = db.relationship("Salas", back_populates="turmas")
     aluno_tumas = db.relationship("AlunoTurmas", back_populates="turmas")
-
-    

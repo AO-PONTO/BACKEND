@@ -2,12 +2,9 @@ from datetime import datetime
 from uuid import UUID
 
 from fastapi import Form
-from pydantic import BaseModel, Field, validator, model_validator
+from pydantic import BaseModel, Field, model_validator, validator
 
 from app import error, models, util
-
-
-
 
 __all__ = [
     "PostCardapio",
@@ -23,10 +20,10 @@ class PostCardapio(BaseModel):
         nome (str): descrever nome.
         descricao (str): descrever descricao.
     """
-    
+
     nome: str = Field(None, description="nome Documentar")
     descricao: str = Field(None, description="descricao Documentar")
-    
+
     #     validate_nome= validator("nome", allow_reuse=True)(...)
     #     validate_descricao= validator("descricao", allow_reuse=True)(...)
 
@@ -80,13 +77,15 @@ class GetCardapio(BaseModel):
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
     """
-    
+
     nome: str | None = Field(None, description="nome Documentar")
     descricao: str | None = Field(None, description="descricao Documentar")
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
-    updated_at: datetime | None = Field(None, description="updated_at Documentar")
-    
+    updated_at: datetime | None = Field(
+        None, description="updated_at Documentar"
+    )
+
     class Config:
         from_attributes = True
 
@@ -98,6 +97,6 @@ class PutCardapio(BaseModel):
         nome (str): descrever nome.
         descricao (str): descrever descricao.
     """
-    
+
     nome: str = Field(None, description="nome Documentar")
     descricao: str = Field(None, description="descricao Documentar")

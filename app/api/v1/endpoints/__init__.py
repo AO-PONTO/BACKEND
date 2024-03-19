@@ -1,19 +1,18 @@
 from fastapi import APIRouter
 
-from .cardapio_escola import router as cardapio_escola_router
-from .salas import router as salas_router
-from .usuario import router as usuario_router
-from .escolas import router as escolas_router
-from .turmas import router as turmas_router
-from .login import router as login_router
 from .aluno_turmas import router as aluno_turmas_router
-from .papel import router as papel_router
-from .cardapio import router as cardapio_router
 from .alunos import router as alunos_router
-from .frequencias import router as frequencias_router
+from .cardapio import router as cardapio_router
+from .cardapio_escola import router as cardapio_escola_router
 from .disciplinas import router as disciplinas_router
+from .escolas import router as escolas_router
+from .frequencias import router as frequencias_router
+from .login import router as login_router
+from .papel import router as papel_router
 from .relatorio_merendeiras import router as relatorio_merendeiras_router
-
+from .salas import router as salas_router
+from .turmas import router as turmas_router
+from .usuario import router as usuario_router
 
 routers = APIRouter()
 

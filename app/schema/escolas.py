@@ -2,12 +2,9 @@ from datetime import datetime
 from uuid import UUID
 
 from fastapi import Form
-from pydantic import BaseModel, Field, validator, model_validator
+from pydantic import BaseModel, Field, model_validator, validator
 
 from app import error, models, util
-
-
-
 
 __all__ = [
     "PostEscolas",
@@ -29,16 +26,18 @@ class PostEscolas(BaseModel):
         categoria_administrativa (str): descrever categoria_administrativa.
         etapa_ensino (str): descrever etapa_ensino.
     """
-    
+
     nome: str = Field(None, description="nome Documentar")
     inep_codigo: str = Field(None, description="inep_codigo Documentar")
     uf: str = Field(None, description="uf Documentar")
     municipio: str = Field(None, description="municipio Documentar")
     cep: str = Field(None, description="cep Documentar")
     endereco: str = Field(None, description="endereco Documentar")
-    categoria_administrativa: str = Field(None, description="categoria_administrativa Documentar")
+    categoria_administrativa: str = Field(
+        None, description="categoria_administrativa Documentar"
+    )
     etapa_ensino: str = Field(None, description="etapa_ensino Documentar")
-    
+
     #     validate_nome= validator("nome", allow_reuse=True)(...)
     #     validate_inep_codigo= validator("inep_codigo", allow_reuse=True)(...)
     #     validate_uf= validator("uf", allow_reuse=True)(...)
@@ -85,7 +84,9 @@ class PostEscolas(BaseModel):
         municipio: str = Form(None, description="municipio Documentar"),
         cep: str = Form(None, description="cep Documentar"),
         endereco: str = Form(None, description="endereco Documentar"),
-        categoria_administrativa: str = Form(None, description="categoria_administrativa Documentar"),
+        categoria_administrativa: str = Form(
+            None, description="categoria_administrativa Documentar"
+        ),
         etapa_ensino: str = Form(None, description="etapa_ensino Documentar"),
         uuid: UUID = Form(..., description="uuid Documentar"),
         created_at: datetime = Form(..., description="created_at Documentar"),
@@ -122,19 +123,25 @@ class GetEscolas(BaseModel):
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
     """
-    
+
     nome: str | None = Field(None, description="nome Documentar")
     inep_codigo: str | None = Field(None, description="inep_codigo Documentar")
     uf: str | None = Field(None, description="uf Documentar")
     municipio: str | None = Field(None, description="municipio Documentar")
     cep: str | None = Field(None, description="cep Documentar")
     endereco: str | None = Field(None, description="endereco Documentar")
-    categoria_administrativa: str | None = Field(None, description="categoria_administrativa Documentar")
-    etapa_ensino: str | None = Field(None, description="etapa_ensino Documentar")
+    categoria_administrativa: str | None = Field(
+        None, description="categoria_administrativa Documentar"
+    )
+    etapa_ensino: str | None = Field(
+        None, description="etapa_ensino Documentar"
+    )
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
-    updated_at: datetime | None = Field(None, description="updated_at Documentar")
-    
+    updated_at: datetime | None = Field(
+        None, description="updated_at Documentar"
+    )
+
     class Config:
         from_attributes = True
 
@@ -152,12 +159,14 @@ class PutEscolas(BaseModel):
         categoria_administrativa (str): descrever categoria_administrativa.
         etapa_ensino (str): descrever etapa_ensino.
     """
-    
+
     nome: str = Field(None, description="nome Documentar")
     inep_codigo: str = Field(None, description="inep_codigo Documentar")
     uf: str = Field(None, description="uf Documentar")
     municipio: str = Field(None, description="municipio Documentar")
     cep: str = Field(None, description="cep Documentar")
     endereco: str = Field(None, description="endereco Documentar")
-    categoria_administrativa: str = Field(None, description="categoria_administrativa Documentar")
+    categoria_administrativa: str = Field(
+        None, description="categoria_administrativa Documentar"
+    )
     etapa_ensino: str = Field(None, description="etapa_ensino Documentar")

@@ -2,12 +2,9 @@ from datetime import datetime
 from uuid import UUID
 
 from fastapi import Form
-from pydantic import BaseModel, Field, validator, model_validator
+from pydantic import BaseModel, Field, model_validator, validator
 
 from app import error, models, util
-
-
-
 
 __all__ = [
     "PostDisciplinas",
@@ -22,9 +19,9 @@ class PostDisciplinas(BaseModel):
     Attributes:
         name (str): descrever name.
     """
-    
+
     name: str = Field(None, description="name Documentar")
-    
+
     #     validate_name= validator("name", allow_reuse=True)(...)
 
     @model_validator(mode="before")
@@ -73,12 +70,14 @@ class GetDisciplinas(BaseModel):
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
     """
-    
+
     name: str | None = Field(None, description="name Documentar")
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
-    updated_at: datetime | None = Field(None, description="updated_at Documentar")
-    
+    updated_at: datetime | None = Field(
+        None, description="updated_at Documentar"
+    )
+
     class Config:
         from_attributes = True
 
@@ -89,5 +88,5 @@ class PutDisciplinas(BaseModel):
     Attributes:
         name (str): descrever name.
     """
-    
+
     name: str = Field(None, description="name Documentar")

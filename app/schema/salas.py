@@ -2,12 +2,9 @@ from datetime import datetime
 from uuid import UUID
 
 from fastapi import Form
-from pydantic import BaseModel, Field, validator, model_validator
+from pydantic import BaseModel, Field, model_validator, validator
 
 from app import error, models, util
-
-
-
 
 __all__ = [
     "PostSalas",
@@ -23,7 +20,7 @@ class PostSalas(BaseModel):
         nome (str): descrever nome.
         escola_uuid (UUID): descrever escola_uuid.
     """
-    
+
     nome: str = Field(None, description="nome Documentar")
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
     ano: str = Field(None, description="ano Documentar")
@@ -41,7 +38,6 @@ class PostSalas(BaseModel):
             raise error.custom_HTTPException(e)
 
 
-
 class GetSalas(BaseModel):
     """__summary__
 
@@ -52,15 +48,19 @@ class GetSalas(BaseModel):
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
     """
-    
+
     nome: str | None = Field(None, description="nome Documentar")
     ano: str = Field(None, description="ano Documentar")
     turno: str = Field(None, description="turno Documentar")
-    escola_uuid: UUID | None = Field(None, description="escola_uuid Documentar")
+    escola_uuid: UUID | None = Field(
+        None, description="escola_uuid Documentar"
+    )
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
-    updated_at: datetime | None = Field(None, description="updated_at Documentar")
-    
+    updated_at: datetime | None = Field(
+        None, description="updated_at Documentar"
+    )
+
     class Config:
         from_attributes = True
 
@@ -72,7 +72,7 @@ class PutSalas(BaseModel):
         nome (str): descrever nome.
         escola_uuid (UUID): descrever escola_uuid.
     """
-    
+
     nome: str = Field(None, description="nome Documentar")
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
     ano: str = Field(None, description="ano Documentar")

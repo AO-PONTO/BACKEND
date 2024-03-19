@@ -129,7 +129,6 @@ class Key:
             None, description="Token OAuth2 **'Bearer token'**"
         )
     ):
-
         payload = decode_token(token)
         return payload
 

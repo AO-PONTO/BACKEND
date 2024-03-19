@@ -1,15 +1,19 @@
 from fastapi import APIRouter
 from fastapi.param_functions import Depends
 from pydantic.types import UUID4
+
 from app import auth, error, models, schema
 from app.util import QueryParametersDep
 
-router = APIRouter(prefix="/relatorio-merendeiras", tags=["RelatorioMerendeiras"])
+router = APIRouter(
+    prefix="/relatorio-merendeiras", tags=["RelatorioMerendeiras"]
+)
 
 
 @router.get(
     "/",
-    response_model=list[schema.GetRelatorioMerendeiras] | schema.GetRelatorioMerendeiras,
+    response_model=list[schema.GetRelatorioMerendeiras]
+    | schema.GetRelatorioMerendeiras,
     status_code=200,
 )
 def get_relatorio_merendeiras(
@@ -39,7 +43,9 @@ def get_relatorio_merendeiras(
         error.custom_HTTPException(e)
 
 
-@router.post("/", response_model=schema.GetRelatorioMerendeiras, status_code=201)
+@router.post(
+    "/", response_model=schema.GetRelatorioMerendeiras, status_code=201
+)
 def create_relatorio_merendeiras(
     json_data: schema.PostRelatorioMerendeiras,
     authorization: str = Depends(auth.Key.n1),
@@ -63,7 +69,9 @@ def create_relatorio_merendeiras(
         error.custom_HTTPException(e)
 
 
-@router.put("/", response_model=schema.GetRelatorioMerendeiras, status_code=200)
+@router.put(
+    "/", response_model=schema.GetRelatorioMerendeiras, status_code=200
+)
 def update_relatorio_merendeiras_by_uuid(
     uuid: UUID4,
     json_data: schema.PutRelatorioMerendeiras,

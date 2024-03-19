@@ -1,13 +1,10 @@
-from datetime import datetime, date
+from datetime import date, datetime
 from uuid import UUID
 
 from fastapi import Form
-from pydantic import BaseModel, Field, validator, model_validator
+from pydantic import BaseModel, Field, model_validator, validator
 
 from app import error, models, util
-
-
-
 
 __all__ = [
     "PostRelatorioMerendeiras",
@@ -27,14 +24,14 @@ class PostRelatorioMerendeiras(BaseModel):
         sobra_suja (str): descrever sobra_suja.
         data (date): descrever data.
     """
-    
+
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
     escola_name: str = Field(None, description="escola_name Documentar")
     numero_alunos: str = Field(None, description="numero_alunos Documentar")
     sobra_limpa: str = Field(None, description="sobra_limpa Documentar")
     sobra_suja: str = Field(None, description="sobra_suja Documentar")
     data: date = Field(None, description="data Documentar")
-    
+
     #     validate_escola_uuid= validator("escola_uuid", allow_reuse=True)(...)
     #     validate_escola_name= validator("escola_name", allow_reuse=True)(...)
     #     validate_numero_alunos= validator("numero_alunos", allow_reuse=True)(...)
@@ -73,7 +70,9 @@ class PostRelatorioMerendeiras(BaseModel):
         cls,
         escola_uuid: UUID = Form(None, description="escola_uuid Documentar"),
         escola_name: str = Form(None, description="escola_name Documentar"),
-        numero_alunos: str = Form(None, description="numero_alunos Documentar"),
+        numero_alunos: str = Form(
+            None, description="numero_alunos Documentar"
+        ),
         sobra_limpa: str = Form(None, description="sobra_limpa Documentar"),
         sobra_suja: str = Form(None, description="sobra_suja Documentar"),
         data: date = Form(None, description="data Documentar"),
@@ -108,17 +107,23 @@ class GetRelatorioMerendeiras(BaseModel):
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
     """
-    
-    escola_uuid: UUID | None = Field(None, description="escola_uuid Documentar")
+
+    escola_uuid: UUID | None = Field(
+        None, description="escola_uuid Documentar"
+    )
     escola_name: str | None = Field(None, description="escola_name Documentar")
-    numero_alunos: str | None = Field(None, description="numero_alunos Documentar")
+    numero_alunos: str | None = Field(
+        None, description="numero_alunos Documentar"
+    )
     sobra_limpa: str | None = Field(None, description="sobra_limpa Documentar")
     sobra_suja: str | None = Field(None, description="sobra_suja Documentar")
     data: date | None = Field(None, description="data Documentar")
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
-    updated_at: datetime | None = Field(None, description="updated_at Documentar")
-    
+    updated_at: datetime | None = Field(
+        None, description="updated_at Documentar"
+    )
+
     class Config:
         from_attributes = True
 
@@ -134,7 +139,7 @@ class PutRelatorioMerendeiras(BaseModel):
         sobra_suja (str): descrever sobra_suja.
         data (date): descrever data.
     """
-    
+
     escola_uuid: UUID = Field(None, description="escola_uuid Documentar")
     escola_name: str = Field(None, description="escola_name Documentar")
     numero_alunos: str = Field(None, description="numero_alunos Documentar")

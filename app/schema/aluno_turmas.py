@@ -2,12 +2,9 @@ from datetime import datetime
 from uuid import UUID
 
 from fastapi import Form
-from pydantic import BaseModel, Field, validator, model_validator
+from pydantic import BaseModel, Field, model_validator, validator
 
 from app import error, models, util
-
-
-
 
 __all__ = [
     "PostAlunoTurmas",
@@ -24,11 +21,11 @@ class PostAlunoTurmas(BaseModel):
         turma_uuid (UUID): descrever turma_uuid.
         turma_name (str): descrever turma_name.
     """
-    
+
     aluno_uuid: UUID = Field(None, description="aluno_uuid Documentar")
     turma_uuid: UUID = Field(None, description="turma_uuid Documentar")
     turma_name: str = Field(None, description="turma_name Documentar")
-    
+
     #     validate_aluno_uuid= validator("aluno_uuid", allow_reuse=True)(...)
     #     validate_turma_uuid= validator("turma_uuid", allow_reuse=True)(...)
     #     validate_turma_name= validator("turma_name", allow_reuse=True)(...)
@@ -87,14 +84,16 @@ class GetAlunoTurmas(BaseModel):
         created_at (datetime): descrever created_at.
         updated_at (datetime): descrever updated_at.
     """
-    
+
     aluno_uuid: UUID | None = Field(None, description="aluno_uuid Documentar")
     turma_uuid: UUID | None = Field(None, description="turma_uuid Documentar")
     turma_name: str | None = Field(None, description="turma_name Documentar")
     uuid: UUID = Field(..., description="uuid Documentar")
     created_at: datetime = Field(..., description="created_at Documentar")
-    updated_at: datetime | None = Field(None, description="updated_at Documentar")
-    
+    updated_at: datetime | None = Field(
+        None, description="updated_at Documentar"
+    )
+
     class Config:
         from_attributes = True
 
@@ -107,7 +106,7 @@ class PutAlunoTurmas(BaseModel):
         turma_uuid (UUID): descrever turma_uuid.
         turma_name (str): descrever turma_name.
     """
-    
+
     aluno_uuid: UUID = Field(None, description="aluno_uuid Documentar")
     turma_uuid: UUID = Field(None, description="turma_uuid Documentar")
     turma_name: str = Field(None, description="turma_name Documentar")

@@ -1,5 +1,5 @@
-from .alunos_model import Alunos
 from .aluno_turmas_model import AlunoTurmas
+from .alunos_model import Alunos
 from .cardapio_escola_model import CardapioEscola
 from .cardapio_model import Cardapio
 from .disciplinas_model import Disciplinas
