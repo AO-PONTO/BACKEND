@@ -103,6 +103,7 @@ def pop_db() -> None:
                 else "admin",
                 email="juniormarans@gmail.com",
                 active=True,
+                access_level=role_admin.access_level,
             )
             user_data = models.Usuario(**usuario_schema.model_dump())
             user_data.create()
@@ -116,7 +117,7 @@ def pop_db() -> None:
         else:
             usuario_schema = schema.PostUsuario(
                 cpf=usuarios[0]["cpf"],
-                cpf=usuarios[0]["nome"],
+                nome=usuarios[0]["nome"],
                 email=usuarios[0]["email"],
                 senha=usuarios[0]["senha"],
                 papel_uuid=role_gestor.uuid,
