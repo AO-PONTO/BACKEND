@@ -11,5 +11,6 @@ class Frequencias(Base):
         primary_key=True,
     )
     chamada = db.Column(db.Boolean)
-    data = db.Column(db.Integer)
+    data = db.Column(db.String)
+    hora = db.Column(db.String)
     aluno_turma = db.relationship("AlunoTurmas", back_populates="frequencia")
