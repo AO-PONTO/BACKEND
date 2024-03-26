@@ -1,4 +1,4 @@
-name: Build Python Application Docker Image
+name: Build FastApi Python
 
 on:
   push:
@@ -35,6 +35,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
             docker pull abacatedev/aoponto:backend
             cd aoponto/backend-aoponto/
             docker compose down
